@@ -27,6 +27,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <title>Takudzwa Pamhirwa | Web Developer</title>
+    <script src=" https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   </head>
 
   <body>
@@ -52,7 +53,7 @@
         <h2 class="bio-title">About Me</h2>
         <p class="bio-text">
           I'm a creative <strong>Developer</strong> looking for an opportunity to
-          work remotely as a <strong>Front-End Developer</strong> . I love to bring ideas to
+          work as a <strong>Front-End Developer</strong> . I love to bring ideas to
           life by creating modern and responsive web experiences.
         </p>
       </div>
@@ -169,64 +170,72 @@
           </p>
           <a href="https://me-online-college.vercel.app/" target="_blank" class="project-link">Check it Out</a>
         </div>
+        <div class="project-container project-card">
+          <img
+            src="assets/images/dragonstar.png"
+            alt="twitter homepage image"
+            class="project-pic"
+          />
+          <h3 class="project-title">Dragon Star Pavers and Bricks</h3>
+          <p class="project-details">
+            A local company that manufactures pavers and bricks
+          </p>
+          <a
+            href="https://dragonstarpaversandbrick.co.zw/"
+            target="_blank"
+            class="project-link"
+            >Check it Out</a
+          >
+        </div>
         <br>
       </div>
     </section>
 
     <!-- Contact section -->
     <section class="contact" id="contact">
-      <h2>Get In Touch With Me</h2>
-      <div class="contact-form-container">
+      <h2 class="get-in-touch">Get In Touch With Me</h2>
+      <div class="contact-us-div">
         <div class="contact-form">
-          <form action="https://formspree.io/f/xoqykzey" method="POST">
-            <div class="form-control">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="sender-name"
-                placeholder="Enter Your Name"
-                class="input-field"
-                required
-              />
-            </div>
-            <div class="form-control">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="sender-email"
-                placeholder="Enter Your Email"
-                class="input-field"
-                required
-              />
-            </div>
-            <div class="form-control">
-              <label for="message">Message</label>
-              <textarea
-                id="message"
-                cols="60"
-                rows="10"
-                placeholder="Enter Your Message"
-                name="message"
-                class="input-field"
-                required
-              ></textarea>
-            </div>
+          <div class="form-group">
+            <label for="">Your Name</label>
+            <input type="text" id="name" placeholder="John Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="">Your Email</label>
             <input
-              type="submit"
-              value="Submit"
-              id="submit-btn"
-              class="submit-btn"
+              type="email"
+              id="email"
+              placeholder="johndoe@gmail.com"
+              required
             />
-          </form>
+          </div>
+          <div class="form-group">
+            <label for="">Phone Number</label>
+            <input
+              type="number"
+              id="phone"
+              placeholder="Phone Number (+263)"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Subject</label>
+            <input type="text" id="subject" placeholder="Subject" required />
+          </div>
+          <div class="form-group">
+            <label for="">Message</label>
+            <textarea id="message" placeholder="Message" required></textarea>
+          </div>
+          <div class="form-group">
+            <button onclick="sendMessage();">Send Message</button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Social accounts - Fixed to the right -->
     <div class="socials">
-      <a href="https://twitter.com/home" target="_blank"
+      <a href="https://x.com/mujo1706?t=kX-QDyddzt31yxoClc_uFA&s=08" target="_blank"
         ><img
           src="assets/icons/icons8-twitter-circled.gif"
           alt="Twitter"
@@ -274,5 +283,35 @@
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
     ></script>
+
+    <script>
+      function sendMessage() {
+        (function () {
+          emailjs.init("BZ94n7iAQhL3DOuFm"); // Account Public Key
+        })();
+
+        var serviceID = "service_6tg37jp"; // Email Service ID
+        var templateID = "template_n9fb65f"; // Email Template ID
+
+        var params = {
+          sendername: document.querySelector("#name").value,
+          senderemail: document.querySelector("#email").value,
+          phone: document.querySelector("#phone").value,
+          subject: document.querySelector("#subject").value,
+          message: document.querySelector("#message").value,
+        };
+
+        emailjs
+          .send(serviceID, templateID, params)
+          .then((res) => {
+            alert(
+              "Thank you, " +
+                params["sendername"] +
+                "! Your message has been sent."
+            );
+          })
+          .catch();
+      }
+    </script>
   </body>
 </html>
